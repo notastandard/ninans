@@ -1,0 +1,181 @@
+<h1>NINANS - Ninans Is Not A Naming Standard</h1>
+<h2>Introduction</h2>
+<p>There are a number of public cloud providers who offer services in different geographic regions. Regions are always named differently across providers. Some people like to deploy things in multiple clouds. Some people like to encode information in the names of the resources they deploy in clouds. This may or may not be a good idea.</p>
+<p>It may be useful to name stuff consistently, regardless of which cloud provider or region you use. That's NINANS.</p>
+<h2>Principles</h2>
+<ul>
+<li>Concise. Some systems require short hostnames (e.g. NetBIOS = 15 characters). Leave spare characters for local naming components.</li>
+<li>Compatible. Lower case letters and numbers only and start with a letter.</li>
+<li>Machine readable. Fixed length overall. Each name component is also fixed length.</li>
+<li>Predictable. Use existing standards (locations based on ISO standards).</li>
+</ul>
+<h2>The not a standard</h2>
+<p><code>${provider[2]}${service_qualifier[1]}${country[2]}${subdivision_or_compass_direction[3]}${numerical_qualifier[2]}</code></p>
+<p>(total 10 characters)</p>
+<h2>Name components</h2>
+<h3>1. Provider</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Provider</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>aw</code></td>
+<td>Amazon Web Services</td>
+</tr>
+<tr>
+<td><code>az</code></td>
+<td>Microsoft Azure</td>
+</tr>
+<tr>
+<td><code>do</code></td>
+<td>DigitalOcean</td>
+</tr>
+<tr>
+<td><code>gc</code></td>
+<td>Google Cloud Platform</td>
+</tr>
+</tbody>
+</table>
+<h3>2. Service qualifier</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Service qualifier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>b</code></td>
+<td>AWS iso-b secret partition</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td>Azure Early Updates Access Program</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>AWS GovCloud</td>
+</tr>
+<tr>
+<td><code>i</code></td>
+<td>AWS iso secret partition</td>
+</tr>
+<tr>
+<td><code>j</code></td>
+<td>Azure Jio partner region</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>Standard region (no special qualifier)</td>
+</tr>
+</tbody>
+</table>
+<h3>3. Country</h3>
+<p>Use the <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> lowercased two character country code for the region.</p>
+<h3>4. Subdivision or compass direction</h3>
+<h4>Subdivision (first preference)</h4>
+<ul>
+<li>When the subdivision within a country of the provider region is known and documented, use the most specific but accurate available <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a> lowercased three character subdivision code for the location.</li>
+<li>Where multiple official codes for a single subdivision exist in different administrative languages, use the English code (e.g. Cardiff = <code>CRF</code>).</li>
+<li>Where subdivision codes are less than three characters in length, pad with <code>x</code> characters as a <strong>suffix</strong> to make three characters (e.g. California = <code>cax</code>, Seoul = <code>11x</code>).</li>
+</ul>
+<h4>Compass direction (second preference)</h4>
+<ul>
+<li>A compass direction may be used instead of a country subdivison only when the country subdivision is unknown, but the compass direction is known. Use the accepted abbrevations for the <a href="https://en.wikipedia.org/wiki/Cardinal_direction">cardinal and ordinal compass directions</a>.</li>
+<li>Pad compass direction with <code>x</code> characters as a <strong>prefix</strong> to make three characters (e.g. north = <code>xxn</code>, southwest = <code>xsw</code>).</li>
+</ul>
+<h4>No subdivision or compass direction (third preference)</h4>
+<p>If no information about the subdivision or campass direction of a region is available, use three <code>x</code> characters.</p>
+<h3>5. Numerical qualifier</h3>
+<ul>
+<li>The provider's own numerical qualifier for a region padded with a leading <code>0</code> if required (e.g. AWS us-east-1 = <code>01</code>).</li>
+<li>Where no numerical qualifier exists, use <code>00</code> (e.g. Azure westeurope = <code>00</code>).</li>
+</ul>
+<h2>Special notes</h2>
+<ol>
+<li><strong>London</strong>: The <a href="https://en.wikipedia.org/wiki/ISO_3166-2:GB">ISO 3166-2:GB</a> standard, listing codes for subdivisions of the United Kingdom, has codes for the individual London boroughs and for the <a href="https://en.wikipedia.org/wiki/City_of_London">City of London</a>. It does not have a code for the <a href="https://en.wikipedia.org/wiki/Greater_London">Greater London</a> area. Where a provider's region is listed simply as &quot;London&quot;, use the code for the City of London (<code>LND</code>) for the NINANS subdivision component.</li>
+</ol>
+<h2>Examples</h2>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Provider region name</th>
+<th>Provider service qualifier</th>
+<th>Country</th>
+<th>Subdivision or compass direction</th>
+<th>NINANS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Microsoft Azure</td>
+<td>centralus</td>
+<td>None</td>
+<td>United States</td>
+<td>Iowa</td>
+<td><code>azsusiax00</code></td>
+</tr>
+<tr>
+<td>Microsoft Azure</td>
+<td>jioindiawest</td>
+<td>Azure Jio partner region</td>
+<td>India</td>
+<td>Gujarāt</td>
+<td><code>azjingjx00</code></td>
+</tr>
+<tr>
+<td>Microsoft Azure</td>
+<td>eastus2euap</td>
+<td>Early Updates Access Program</td>
+<td>United States</td>
+<td>Virginia</td>
+<td><code>azeusvax02</code></td>
+</tr>
+<tr>
+<td>Microsoft Azure</td>
+<td>koreacentral</td>
+<td>None</td>
+<td>Republic of Korea</td>
+<td>Seoul</td>
+<td><code>azskr11x00</code></td>
+</tr>
+<tr>
+<td>Amazon Web Services</td>
+<td>eu-west-2</td>
+<td>None</td>
+<td>United Kingdom</td>
+<td>London</td>
+<td><code>awsgblnd02</code></td>
+</tr>
+<tr>
+<td>Amazon Web Services</td>
+<td>us-gov-west-1</td>
+<td>AWS GovCloud</td>
+<td>United States</td>
+<td>West United States</td>
+<td><code>awgusxxw01</code></td>
+</tr>
+<tr>
+<td>DigitalOcean</td>
+<td>fra1</td>
+<td>None</td>
+<td>Germany</td>
+<td>Hesse</td>
+<td><code>dosdehex01</code></td>
+</tr>
+<tr>
+<td>Google Cloud Platform</td>
+<td>asia-northeast1</td>
+<td>None</td>
+<td>Japan</td>
+<td>Tokyo</td>
+<td><code>gcsjp13x01</code></td>
+</tr>
+</tbody>
+</table>
