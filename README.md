@@ -1,5 +1,8 @@
 # NINANS - Ninans Is Not A Naming Standard
 
+- [ninans.net](https://ninans.net)
+- [source code on GitHub](https://github.com/notastandard/ninans)
+
 ## Introduction
 There are a number of public cloud providers who offer services in different geographic regions. Regions are always named differently across providers. Some people like to deploy things in multiple clouds. Some people like to encode information in the names of the resources they deploy in clouds. This may or may not be a good idea.
 
