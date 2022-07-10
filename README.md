@@ -1,6 +1,5 @@
 # NINANS - Ninans Is Not A Naming Standard
 
-- [ninans.net](https://ninans.net)
 - [source code on GitHub](https://github.com/notastandard/ninans)
 
 ## Introduction
